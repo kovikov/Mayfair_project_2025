@@ -1,11 +1,17 @@
+scikit-learn
 pandas
-scikit-learn==1.5.1
-mlflow
+numpy
+matplotlib
+seaborn
+statsmodels
+xgboost
+tensorflow
+keras
 fastapi
 uvicorn[standard]
-docker
+jupyter
+mlflow
 python-dotenv
-joblib
 # Add Apache Airflow or other specific libraries as needed later 
 
 # Code Quality Tools
