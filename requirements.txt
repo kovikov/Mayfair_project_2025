@@ -7,3 +7,7 @@ docker
 python-dotenv
 joblib
 # Add Apache Airflow or other specific libraries as needed later 
+
+# Code Quality Tools
+flake8
+black 

@@ -1,0 +1,45 @@
+name: Python CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10' # Match Dockerfile base image python version
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Lint with flake8
+      run: |
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+    - name: Format with Black
+      run: |
+        black --check . # Use --check to not modify files, just check formatting
+
+    # Add tests here when available
+    # - name: Run Tests
+    #   run: |
+    #     pytest
+
+    - name: Build Docker image (Optional Check)
+      run: |
+        docker build . --file Dockerfile --tag mayfair_project_api:$(date +%s)
+        echo "Docker image built successfully (check only)" 
