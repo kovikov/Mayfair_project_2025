@@ -1,0 +1,9 @@
+pandas
+scikit-learn
+mlflow
+fastapi
+uvicorn[standard]
+docker
+python-dotenv
+joblib
+# Add Apache Airflow or other specific libraries as needed later 
